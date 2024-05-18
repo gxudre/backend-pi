@@ -1,7 +1,11 @@
 openapi: 3.0.0
 info:
-  title: Loja Açougue Virtual
-  version: 0.0.1
+  title: Api Loja Virtual
+  version: 0.1
 tags:
+  - name: clientes
 paths:
-components: 
+  /clientes:
+  /clientes/{id}:
+components:
+  schemas:
