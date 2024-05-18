@@ -8,19 +8,19 @@ const request = supertest(app);
 let id = null;
 
 describe("API Loja Virtual", () => {
-//   test("Deve retornar 201 e um JSON no POST /clientes", async () => {
-//     const response = await request
-//       .post("/clientes")
-//       .send({
-//         nome: "julia",
-//         telefone: 61999888777,
-//         email: "julia@gmail.com",
-//         endereco: "Condominio velavilaqua quadra 5 casa 22",
-//       });
-//     expect(response.status).toBe(201);
-//     expect(response.type).toBe("application/json");
-//     id = response.body._id;
-//   });
+  test("Deve retornar 201 e um JSON no POST /clientes", async () => {
+    const response = await request
+      .post("/clientes")
+      .send({
+        nome: "julia",
+        telefone: 61999888777,
+        email: "julia@gmail.com",
+        endereco: "Condominio velavilaqua quadra 5 casa 22",
+      });
+    expect(response.status).toBe(201);
+    expect(response.type).toBe("application/json");
+    id = response.body._id;
+  });
 
   test("Deve retornar 422 e um JSON? no POST /clientes", async () => {
     const response = await request.post("/clientes").send({});
@@ -69,6 +69,18 @@ describe("API Loja Virtual", () => {
     const response = await request.put(`/clientes/${id}`).send({});
     expect(response.status).toBe(422);
     expect(response.type).toBe('application/json');
-  });  
+  });
+  
+  test('Deve retornar 204 no DELETE /clientes/id', async () => {
+    const response = await request.delete(`/clientes/${id}`);
+    expect(response.status).toBe(204);
+    expect(response.type).toBe('');
+  });
+
+  test('Deve retornar um 404 e um JSON no DELETE /produtos/id', async () => {
+    const response = await request.delete(`/produtos/${id}`);
+    expect(response.status).toBe(404);
+    expect(response.type).toBe('application/json');
+  });
 
 });
