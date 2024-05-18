@@ -42,4 +42,10 @@ const obterCliente = async (req, res) => {
     res.json(cliente);
 }
 
-module.exports = { validarDadosCliente, novoCliente, obterTodosClientes, clientePeloId, obterCliente  };
+const atualizarCliente = async (req,res) => {
+    const id = new mongoose.Types.ObjectId(req.params.id);
+    const cliente = await Cliente.findByIdAndUpdate({_id: id}, req.body);
+    res.json(cliente);
+};
+
+module.exports = { validarDadosCliente, novoCliente, obterTodosClientes, clientePeloId, obterCliente, atualizarCliente  };
