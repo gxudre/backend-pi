@@ -3,9 +3,28 @@ info:
   title: Api Loja Virtual
   version: 0.1
 tags:
-  - name: clientes
+  - clientes
 paths:
   /clientes:
+    post:
+      tags:
+        - clientes
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Cliente'
+      responses:
+        201:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Cliente'
+        422:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Cliente'
   /clientes/{id}:
 components:
   schemas:
