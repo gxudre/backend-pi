@@ -1,7 +1,8 @@
 const express = require('express');
 
+const controllerProdutos = require('../controllers/controller_produtos');
 const router = express.Router();
 
-// defina as rotas
+router.post('/', controllerProdutos.validarDados, controllerProdutos.novoProduto);
 
 module.exports = router;

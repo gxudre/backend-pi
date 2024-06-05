@@ -10,3 +10,10 @@ async function validarDados(req, res, next) {
         res.status(422).json({ msg: 'Dados de produto invalidos'});
     };
 }
+
+async function novoProduto(req, res) {
+    const produto = await Produto.create(req.body);
+    res.status(201).json(produto);
+}
+
+module.exports = { validarDados, novoProduto }
