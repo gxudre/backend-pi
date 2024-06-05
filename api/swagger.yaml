@@ -1,7 +1,40 @@
 openapi: 3.0.0
 info:
-  title: Loja Açougue Virtual
-  version: 0.0.1
+  title: Api Loja Virtual
+  version: 0.1
 tags:
+  - Fornecedores
 paths:
-components: 
+  /Fornecedores:
+    post:
+      tags:
+        - Fornecedores
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Fornecedor'
+      responses:
+        201:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Fornecedor'
+        422:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Fornecedor'
+components:
+  schemas:
+    Fornecedor:
+      type: object
+      properties:
+        nome:
+          type: string
+        telefone:
+          type: number
+        email:
+          type: string
+        endereco:
+          type: string
