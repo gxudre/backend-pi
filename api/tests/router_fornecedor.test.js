@@ -47,4 +47,30 @@ describe("API", () => {
     expect(response.status).toBe(404);
     expect(response.type).toBe("application/json");
   });
+  test("Deve retornar 200 e um JSON no PUT /fornecedores/id", async () => {
+    const response = await request
+      .put(`/fornecedores/${id}`)
+      .send({
+        nome: "maturatta",
+        telefone: 61333444555,
+        email: "vanessadacarne@gmail.com",
+        endereco: "Ceilondres",
+      });
+    expect(response.status).toBe(200);
+    expect(response.type).toBe("application/json");
+  });
+
+  test("Deve retornar 404 e um JSON no PUT /fornecedores/id", async () => {
+    const response = await request.put(
+      "/fornecedores/664901b4f1aa5565cb12f4c8"
+    );
+    expect(response.status).toBe(404);
+    expect(response.type).toBe("application/json");
+  });
+
+  test("Deve retornar 422 e um JSON no PUT /fornecedores/id", async () => {
+    const response = await request.put(`/fornecedores/${id}`).send({});
+    expect(response.status).toBe(422);
+    expect(response.type).toBe("application/json");
+  });
 });

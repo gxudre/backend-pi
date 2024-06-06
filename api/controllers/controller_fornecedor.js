@@ -41,10 +41,17 @@ async function obterFornecedor(req, res) {
   res.json(fornecedor);
 }
 
+async function atualizarFornecedor(req,res){
+    const id = new mongoose.Types.ObjectId(req.params.id);
+    const fornecedor = await Fornecedor.findByIdAndUpdate({_id: id}, req.body);
+    res.json(fornecedor);
+};
+
 module.exports = {
   validarDadosFornecedor,
   novoFornecedor,
   obterTodosFornecedores,
   obterFornecedor,
-  buscarFornecedorPeloId,
+  buscarFornecedorPeloId, 
+  atualizarFornecedor
 };

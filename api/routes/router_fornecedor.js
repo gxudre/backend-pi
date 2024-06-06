@@ -18,4 +18,11 @@ router.get(
   controllerFornecedores.obterFornecedor
 );
 
+router.put(
+  "/:id",
+  controllerFornecedores.buscarFornecedorPeloId,
+  controllerFornecedores.validarDadosFornecedor,
+  controllerFornecedores.atualizarFornecedor
+);
+
 module.exports = router;
