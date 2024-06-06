@@ -7,7 +7,7 @@ async function validarDados(req, res, next) {
         await produto.validate();
         next();
     } catch (error) {
-        res.status(422).json({ msg: 'Dados de produto invalidos'});
+        res.status(422).json({ msg: 'Dados de produto invalidos' });
     };
 }
 
@@ -21,7 +21,7 @@ async function obterTodosProdutos(req, res) {
     res.json(produtos);
 };
 
-async function buscarProdutoPeloId (req, res, next) {
+async function buscarProdutoPeloId(req, res, next) {
     try {
         const id = new mongoose.Types.ObjectId(req.params.id)
         const produto = await Produto.findOne({ _id: id });
@@ -44,13 +44,13 @@ async function obterProduto(req, res) {
 
 async function atualizarProduto(req, res) {
     const id = new mongoose.Types.ObjectId(req.params.id);
-    const produto = await Produto.findByIdAndUpdate({_id: id}, req.body);
+    const produto = await Produto.findByIdAndUpdate({ _id: id }, req.body);
     res.json(produto);
 };
 
 async function removerProduto(req, res) {
     const id = new mongoose.Types.ObjectId(req.params.id);
-    const produto = await Produto.findByIdAndDelete({_id: id});
+    await Produto.findByIdAndDelete({ _id: id });
     res.status(204).end();
 };
 
