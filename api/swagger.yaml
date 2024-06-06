@@ -25,8 +25,45 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Mensagem'
+    get:
+      tags:
+        - fornecedores
+      responses:
+        200:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schema/ArrayOfFornecedores'
+  /fornecedores/{id}:
+    get:
+      tags:
+        - fornecedores
+      parameters:
+        - in: path
+          type: string
+          name: id
+      responses:
+        200:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schema/Fornecedor'
+        400:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schema/Mensagem'
+        404:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schema/Mensagem'
 components:
   schemas:
+    ArrayOfFornecedores:
+      type: array
+      items:
+        $ref: '#/components/schemas/Fornecedor'
     Fornecedor:
       type: object
       properties:
