@@ -90,7 +90,27 @@ paths:
           content:
             appication/json:
               schema:
-                $ref: '#/components/schemas/Mensagem'    
+                $ref: '#/components/schemas/Mensagem'   
+    delete:
+      tags:
+        - fornecedores
+      parameters:
+        - in: path
+          type: string
+          name: id
+      responses:
+        204:
+          content:
+        400:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Mensagem'
+        404:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Mensagem' 
 components:
   schemas:
     ArrayOfFornecedores:
