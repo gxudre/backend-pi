@@ -48,14 +48,12 @@ describe("API", () => {
     expect(response.type).toBe("application/json");
   });
   test("Deve retornar 200 e um JSON no PUT /fornecedores/id", async () => {
-    const response = await request
-      .put(`/fornecedores/${id}`)
-      .send({
-        nome: "maturatta",
-        telefone: 61333444555,
-        email: "vanessadacarne@gmail.com",
-        endereco: "Ceilondres",
-      });
+    const response = await request.put(`/fornecedores/${id}`).send({
+      nome: "maturatta",
+      telefone: 61333444555,
+      email: "vanessadacarne@gmail.com",
+      endereco: "Ceilondres",
+    });
     expect(response.status).toBe(200);
     expect(response.type).toBe("application/json");
   });
@@ -71,6 +69,18 @@ describe("API", () => {
   test("Deve retornar 422 e um JSON no PUT /fornecedores/id", async () => {
     const response = await request.put(`/fornecedores/${id}`).send({});
     expect(response.status).toBe(422);
+    expect(response.type).toBe("application/json");
+  });
+
+  test("Deve retornar 204 no DELETE /fornecedores/id", async () => {
+    const response = await request.delete(`/fornecedores/${id}`);
+    expect(response.status).toBe(204);
+    expect(response.type).toBe("");
+  });
+
+  test("Deve retornar um 404 e um JSON no DELETE /fornecedores/id", async () => {
+    const response = await request.delete(`/fornecedores/${id}`);
+    expect(response.status).toBe(404);
     expect(response.type).toBe("application/json");
   });
 });

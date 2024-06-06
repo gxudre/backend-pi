@@ -47,11 +47,18 @@ async function atualizarFornecedor(req,res){
     res.json(fornecedor);
 };
 
+async function removerFornecedor(req, res){
+    const id = new mongoose.Types.ObjectId(req.params.id);
+    await Fornecedor.findByIdAndDelete({_id: id});
+    res.status(204).end();
+};
+
 module.exports = {
   validarDadosFornecedor,
   novoFornecedor,
   obterTodosFornecedores,
   obterFornecedor,
   buscarFornecedorPeloId, 
-  atualizarFornecedor
+  atualizarFornecedor,
+  removerFornecedor
 };
