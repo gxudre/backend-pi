@@ -11,4 +11,6 @@ router.get('/:id', controllerProdutos.buscarProdutoPeloId, controllerProdutos.ob
 
 router.put('/:id', controllerProdutos.buscarProdutoPeloId, controllerProdutos.validarDados, controllerProdutos.atualizarProduto);
 
+router.delete('/:id', controllerProdutos.buscarProdutoPeloId, controllerProdutos.removerProduto);
+
 module.exports = router;
