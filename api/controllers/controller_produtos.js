@@ -42,4 +42,10 @@ async function obterProduto(req, res) {
     res.json(produto);
 };
 
-module.exports = { validarDados, novoProduto, obterTodosProdutos, buscarProdutoPeloId, obterProduto }
+async function atualizarProduto(req, res) {
+    const id = new mongoose.Types.ObjectId(req.params.id);
+    const produto = await Produto.findByIdAndUpdate({_id: id}, req.body);
+    res.json(produto);
+};
+
+module.exports = { validarDados, novoProduto, obterTodosProdutos, buscarProdutoPeloId, obterProduto, atualizarProduto }

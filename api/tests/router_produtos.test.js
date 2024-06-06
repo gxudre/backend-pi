@@ -40,4 +40,22 @@ describe('API', () => {
         expect(response.status).toBe(404);
         expect(response.type).toBe('application/json');
       });
+
+      test('Deve retornar 200 e um JSON no PUT /produtos/id', async () => {
+        const response = await request.put(`/produtos/${id}`).send({ nome: "Ancho bovino", preco: 45.0 });
+        expect(response.status).toBe(200);
+        expect(response.type).toBe('application/json');
+    });
+
+    test('Deve retornar 404 e um JSON no PUT /produtos/id', async () => {
+        const response = await request.put('/produtos/6643eb670a1e917ee0581e85');
+        expect(response.status).toBe(404);
+        expect(response.type).toBe('application/json');
+    });
+
+    test('Deve retornar 422 e um JSON? no PUT /produtos', async () => {
+        const response = await request.put(`/produtos/${id}`).send({});
+        expect(response.status).toBe(422);
+        expect(response.type).toBe("application/json");
+    });
 });

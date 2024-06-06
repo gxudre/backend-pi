@@ -9,4 +9,6 @@ router.get('/', controllerProdutos.obterTodosProdutos);
 
 router.get('/:id', controllerProdutos.buscarProdutoPeloId, controllerProdutos.obterProduto);
 
+router.put('/:id', controllerProdutos.buscarProdutoPeloId, controllerProdutos.validarDados, controllerProdutos.atualizarProduto);
+
 module.exports = router;
