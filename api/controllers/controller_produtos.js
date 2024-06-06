@@ -16,4 +16,30 @@ async function novoProduto(req, res) {
     res.status(201).json(produto);
 }
 
-module.exports = { validarDados, novoProduto }
+async function obterTodosProdutos(req, res) {
+    const produtos = await Produto.find({});
+    res.json(produtos);
+};
+
+async function buscarProdutoPeloId (req, res, next) {
+    try {
+        const id = new mongoose.Types.ObjectId(req.params.id)
+        const produto = await Produto.findOne({ _id: id });
+        if (produto) {
+            next();
+        } else {
+            res.status(404).json({ msg: 'Produto não encontrado!' })
+        }
+    } catch (error) {
+        res.status(400).json({ msg: 'id inválido!' });
+    }
+
+}
+
+async function obterProduto(req, res) {
+    const id = new mongoose.Types.ObjectId(req.params.id);
+    const produto = await Produto.findOne({ _id: id });
+    res.json(produto);
+};
+
+module.exports = { validarDados, novoProduto, obterTodosProdutos, buscarProdutoPeloId, obterProduto }
