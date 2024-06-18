@@ -4,7 +4,117 @@ info:
   version: 0.1
 tags:
   - clientes
+  - Fornecedores
+  - produtos
 paths:
+  /Fornecedores:
+    post:
+      tags:
+        - Fornecedores
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Fornecedor"
+      responses:
+        201:
+          content:
+            application/json:
+              schemas:
+                $ref: "#/components/schemas/Fornecedor"
+        422:
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Mensagem"            
+    get:
+      tags:
+        - fornecedores
+      responses:
+        200:
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ArrayOfFornecedores"
+      security:
+        - JWTAuth: []
+  /fornecedores/{id}:
+    get:
+      tags:
+        - fornecedores
+      parameters:
+        - in: path
+          type: string
+          name: id
+      responses:
+        200:
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Fornecedor"
+        400:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schema/Mensagem'
+        404:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Mensagem'
+    put:
+      tags:
+        - fornecedores
+      parameters:
+        - in: path
+          type: string
+          name: id
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Fornecedor'
+      responses:
+        200:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Fornecedor'
+        400:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Mensagem'
+        404:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Mensagem'        
+        422:
+          content:
+            appication/json:
+              schema:
+                $ref: '#/components/schemas/Mensagem'
+    delete:
+      tags:
+        - fornecedores
+      parameters:
+        - in: path
+          type: string
+          name: id
+      responses:
+        204:
+          content:
+        400:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Mensagem'
+        404:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Mensagem' 
   /clientes:
     post:
       tags:
@@ -13,18 +123,18 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Cliente'
+              $ref: "#/components/schemas/Cliente"
       responses:
         201:
           content:
             application/json:
-              schema:
-                $ref: '#/components/schemas/Cliente'
+              schemas:
+                $ref: "#/components/schemas/Cliente"
         422:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Cliente'
+                $ref: "#/components/schemas/Mensagem"   
     get:
       tags:
         - clientes
@@ -33,9 +143,9 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ArrayOfClientes'
+                $ref: "#/components/schemas/ArrayOfClientes"
       security:
-        - JWTAuth: []
+        - JWTAuth: []         
   /clientes/{id}:
     get:
       tags:
@@ -49,7 +159,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schema/Cliente'
+                $ref: "#/components/schemas/Cliente"
         400:
           content:
             application/json:
@@ -59,7 +169,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schema/Mensagem'
+                $ref: '#/components/schemas/Mensagem'
     put:
       tags:
         - clientes
@@ -82,12 +192,12 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schema/Mensagem'
+                $ref: '#/components/schemas/Mensagem'
         404:
           content:
             application/json:
               schema:
-                $ref: '#/components/schema/Mensagem'        
+                $ref: '#/components/schemas/Mensagem'        
         422:
           content:
             appication/json:
@@ -107,12 +217,120 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schema/Mensagem'
+                $ref: '#/components/schemas/Mensagem'
         404:
           content:
             application/json:
               schema:
-                $ref: '#/components/schema/Mensagem'
+                $ref: '#/components/schemas/Mensagem' 
+  /produtos:
+    post:
+      tags:
+        - produtos
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Produto'
+      responses:
+        201:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Produto'
+        422:
+          content:
+            appication/json:
+              schema:
+                $ref: '#/components/schemas/Mensagem'
+    get:
+      tags:
+        - produtos
+      responses:
+        200:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ArrayOfProdutos'
+      security:
+        - JWTAuth: []
+  /produtos/{id}:
+    get:
+      tags:
+        - produtos
+      parameters:
+        - in: path
+          type: string
+          name: id
+      responses:
+        200:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Produto'
+        400:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Mensagem'
+        404:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Mensagem'
+    put:
+      tags:
+        - produtos
+      parameters:
+        - in: path
+          type: string
+          name: id
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Produto'
+      responses:
+        200:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Produto'
+        400:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Mensagem'
+        404:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Mensagem'        
+        422:
+          content:
+            appication/json:
+              schema:
+                $ref: '#/components/schemas/Mensagem'
+    delete:
+      tags:
+        - produtos
+      parameters:
+        - in: path
+          type: string
+          name: id
+      responses:
+        204:
+          content:
+        400:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Mensagem'
+        404:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Mensagem'
 components:
   securitySchemes:
     JWTAuth:
@@ -125,6 +343,27 @@ components:
       items:
         $ref: '#/components/schemas/Cliente'
     Cliente:
+    ArrayOfProdutos:
+      type: array
+      items:
+        $ref: '#/components/schemas/Produto'
+    Produto:
+      type: object
+      properties:
+        nome:
+          type: string
+        preco:
+          type: number
+    Mensagem:
+      type: object
+      properties:
+        msg:
+          type: string
+    ArrayOfFornecedores:
+      type: array
+      items:
+        $ref: "#/components/schemas/Fornecedor"
+    Fornecedor:
       type: object
       properties:
         nome:

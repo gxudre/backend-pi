@@ -6,6 +6,10 @@ var logger = require('morgan');
 
 const routerApiDocs = require('./routes/apidocs');
 const routerClientes = require('./routes/router_clientes')
+const routerFornecedor = require('./routes/router_fornecedor')
+
+
+const routerProdutos = require('./routes/router_produtos');
 
 var app = express();
 
@@ -18,5 +22,7 @@ app.use(cookieParser());
 
 app.use('/api-docs', routerApiDocs);
 app.use('/clientes', routerClientes);
+app.use('/fornecedores', routerFornecedor);
+app.use('/produtos', routerProdutos);
 
 module.exports = app;
