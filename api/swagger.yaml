@@ -1,8 +1,9 @@
 openapi: 3.0.0
 info:
-  title: Loja Açougue Virtual
-  version: 0.0.1
+  title: Api Loja Virtual
+  version: 0.1
 tags:
+  - clientes
   - Fornecedores
   - produtos
 paths:
@@ -19,13 +20,13 @@ paths:
         201:
           content:
             application/json:
-              schema:
+              schemas:
                 $ref: "#/components/schemas/Fornecedor"
         422:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Mensagem"
+                $ref: "#/components/schemas/Mensagem"            
     get:
       tags:
         - fornecedores
@@ -55,12 +56,12 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Mensagem"
+                $ref: '#/components/schema/Mensagem'
         404:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Mensagem"
+                $ref: '#/components/schemas/Mensagem'
     put:
       tags:
         - fornecedores
@@ -93,7 +94,7 @@ paths:
           content:
             appication/json:
               schema:
-                $ref: '#/components/schemas/Mensagem'   
+                $ref: '#/components/schemas/Mensagem'
     delete:
       tags:
         - fornecedores
@@ -114,7 +115,115 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Mensagem' 
- /produtos:
+  /clientes:
+    post:
+      tags:
+        - clientes
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Cliente"
+      responses:
+        201:
+          content:
+            application/json:
+              schemas:
+                $ref: "#/components/schemas/Cliente"
+        422:
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Mensagem"   
+    get:
+      tags:
+        - clientes
+      responses:
+        200:
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ArrayOfClientes"
+      security:
+        - JWTAuth: []         
+  /clientes/{id}:
+    get:
+      tags:
+        - clientes
+      parameters:
+        - in: path
+          type: string
+          name: id
+      responses:
+        200:
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Cliente"
+        400:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schema/Mensagem'
+        404:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Mensagem'
+    put:
+      tags:
+        - clientes
+      parameters:
+        - in: path
+          type: string
+          name: id
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Cliente'
+      responses:
+        200:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Cliente'
+        400:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Mensagem'
+        404:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Mensagem'        
+        422:
+          content:
+            appication/json:
+              schema:
+                $ref: '#/components/schemas/Mensagem'
+    delete:
+      tags:
+        - clientes
+      parameters:
+        - in: path
+          type: string
+          name: id
+      responses:
+        204:
+          content:
+        400:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Mensagem'
+        404:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Mensagem' 
+  /produtos:
     post:
       tags:
         - produtos
@@ -229,6 +338,11 @@ components:
       in: header
       name: Authorization
   schemas:
+    ArrayOfClientes:
+      type: array
+      items:
+        $ref: '#/components/schemas/Cliente'
+    Cliente:
     ArrayOfProdutos:
       type: array
       items:
@@ -265,5 +379,3 @@ components:
       properties:
         msg:
           type: string
-
- 
