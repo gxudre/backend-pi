@@ -1,11 +1,120 @@
 openapi: 3.0.0
 info:
-  title: API Loja Virtual
+  title: Loja Açougue Virtual
   version: 0.0.1
 tags:
+  - Fornecedores
   - produtos
 paths:
-  /produtos:
+  /Fornecedores:
+    post:
+      tags:
+        - Fornecedores
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Fornecedor"
+      responses:
+        201:
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Fornecedor"
+        422:
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Mensagem"
+    get:
+      tags:
+        - fornecedores
+      responses:
+        200:
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ArrayOfFornecedores"
+      security:
+        - JWTAuth: []
+  /fornecedores/{id}:
+    get:
+      tags:
+        - fornecedores
+      parameters:
+        - in: path
+          type: string
+          name: id
+      responses:
+        200:
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Fornecedor"
+        400:
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Mensagem"
+        404:
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Mensagem"
+    put:
+      tags:
+        - fornecedores
+      parameters:
+        - in: path
+          type: string
+          name: id
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Fornecedor'
+      responses:
+        200:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Fornecedor'
+        400:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Mensagem'
+        404:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Mensagem'        
+        422:
+          content:
+            appication/json:
+              schema:
+                $ref: '#/components/schemas/Mensagem'   
+    delete:
+      tags:
+        - fornecedores
+      parameters:
+        - in: path
+          type: string
+          name: id
+      responses:
+        204:
+          content:
+        400:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Mensagem'
+        404:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Mensagem' 
+ /produtos:
     post:
       tags:
         - produtos
@@ -136,3 +245,25 @@ components:
       properties:
         msg:
           type: string
+    ArrayOfFornecedores:
+      type: array
+      items:
+        $ref: "#/components/schemas/Fornecedor"
+    Fornecedor:
+      type: object
+      properties:
+        nome:
+          type: string
+        telefone:
+          type: number
+        email:
+          type: string
+        endereco:
+          type: string
+    Mensagem:
+      type: object
+      properties:
+        msg:
+          type: string
+
+ 
