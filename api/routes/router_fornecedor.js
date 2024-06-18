@@ -1,6 +1,7 @@
 const express = require("express");
 
 const controllerFornecedores = require("../controllers/controller_fornecedor");
+const validarToken = require("../middlewres/auth");
 
 const router = express.Router();
 
@@ -10,7 +11,7 @@ router.post(
   controllerFornecedores.novoFornecedor
 );
 
-router.get("/", controllerFornecedores.obterTodosFornecedores);
+router.get("/",validarToken, controllerFornecedores.obterTodosFornecedores);
 
 router.get(
   "/:id",
